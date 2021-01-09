@@ -44,14 +44,11 @@ async function loadModel() {
 let model;
 async function loadModel() {
   console.log("model loading..");
-  document.getElementById("console").innerHTML(`<li>model loading...</li>`);
+  document.getElementById("console").innerHTML =`<li>model loading...</li>`;
   model=await tf.loadModel(`model/model.json`);
   console.log("model loaded.");
-  document.getElementById("console").innerHTML(`<li>VGG16 pre trained model loaded.</li>`);
+  document.getElementById("console").innerHTML = "<li>VGG16 pre trained model loaded.</li>";
 };
-
-
-
 
 
 //-----------------------
@@ -61,8 +58,8 @@ async function loadModel() {
 var video;
 function startWebcam() {
 	console.log("video streaming start.");
-	$("#console").html(`<li>video streaming start.</li>`);
-	video = $('#main-stream-video').get(0);
+	document.getElementById("console").innerHTML = `<li>video streaming start.</li>`;
+	video = document.getElementById("main-stream-video").get(0);
 	vendorUrl = window.URL || window.webkitURL;
 
 	navigator.getMedia = navigator.getUserMedia ||
@@ -91,9 +88,18 @@ function startWebcam() {
 // predict button event
 //-----------------------
 
+/*
 $("#predict-button").click(function(){
 	setInterval(predict, 1000/10);
 });
+*/
+
+document.getElementById("predict-button").addEventListener('click', () => {
+  console.log('predict-button clicked');
+  setInterval(predict, 1000/100);
+});
+
+
 
 //-----------------------
 // TensorFlow.js method
@@ -112,12 +118,13 @@ async function predict(){
 	};
 	}).sort(function(a,b){
 		return b.probability-a.probability;
-	}).slice(0,5);
+	}).slice(0,2);
 
-	$("#console").empty();
+	//$("#console").empty();
+	document.getElementById("console").empty();
 
 	results.forEach(function(p){
-		$("#console").append(`<li>${p.className} : ${p.probability.toFixed(6)}</li>`);
+	  document.getElementById("console").append(`<li>${p.className} : ${p.probability.toFixed(6)}</li>`);
 		console.log(p.className,p.probability.toFixed(6))
 	});
 
@@ -155,7 +162,15 @@ function preprocessImage(image){
 // clear button event
 //-----------------------
 
+/*
 $("#clear-button").click(function clear() {
 	location.reload();
 });
+*/
+
+document.getElementById("clear-button").addEventListener('click', () => {
+  console.log('clear-button clicked');
+  location.reload();
+});
+
 
