@@ -20,7 +20,7 @@ class ImageModel {
   constructor(signaturePath: string) {
     const signatureData = readFileSync(signaturePath, "utf8");
     this.signature = JSON.parse(signatureData);
-    this.modelPath = `file://src/model/${this.signature.filename}`;
+    this.modelPath = `https://adash333.github.io/lobe-parcel/src/model/model.json`;
     [this.width, this.height] = this.signature.inputs.Image.shape.slice(1,3);
     this.outputName = this.signature.outputs[this.outputKey].name;
     this.classes = this.signature.classes.Label;
@@ -88,6 +88,7 @@ async function main(imgPath: string) {
   // decode the image into a tensor
   const decodedImage = tf.node.decodeImage(image, 3);
   // create and load our model
+  // 
   const model = new ImageModel('src/model/signature.json');
   await model.load();
   // run the prediction
@@ -107,5 +108,6 @@ if (args.length !== 1) {
 */
 
 // imageのpathを入れる
-const imgPath = document.getElementById('img');
-main(imgPath);
+const imgPath = document.getElementById('img').getAttribute('src');
+//main(imgPath);
+console.log('main.ts')
