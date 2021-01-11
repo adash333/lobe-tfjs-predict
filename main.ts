@@ -89,7 +89,7 @@ async function main(imgPath: string) {
   const decodedImage = tf.node.decodeImage(image, 3);
   // create and load our model
   // 
-  const model = new ImageModel('src/model/signature.json');
+  const model = new ImageModel('https://adash333.github.io/lobe-parcel/src/model/signature.json');
   await model.load();
   // run the prediction
   const results = model.predict(decodedImage);
