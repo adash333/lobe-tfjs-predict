@@ -3,9 +3,11 @@
   Copyright (c) Microsoft Corporation.  All rights reserved.
  -------------------------------------------------------------
  */
+ 
+ /*
 import * as tf from '@tensorflow/tfjs-node';
 import { promises as fs, readFileSync } from 'fs';
-
+*/
 
 class ImageModel {
   signature: any;
@@ -108,6 +110,8 @@ if (args.length !== 1) {
 */
 
 // imageのpathを入れる
-const imgPath = document.getElementById('img').getAttribute('src');
+const imgPath = document.getElementById('image').getAttribute('src');
 //main(imgPath);
-console.log('main.ts')
+console.log('main.ts');
+
+document.getElementById('result').innerHTML = imgPath;
